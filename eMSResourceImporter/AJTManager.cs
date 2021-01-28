@@ -31,8 +31,6 @@ namespace eMSResourceImporter
 
             using (var streamReader = File.OpenText(pathToAJT))
             {
-
-
                 Item currentItem = null;
                 var itemHierarchyTracker = new Dictionary<int, Item>();
 
@@ -137,7 +135,7 @@ namespace eMSResourceImporter
                                                 Logger.Log(Logger.LogType.Warning, "Wrong attribute value.", new MessageDetails()
                                                 {
                                                     SourceFilePath = currentItem.SourceFile,
-                                                    LineNumbe = lineCounter,
+                                                    LineNumber = lineCounter,
                                                     AttributeName = "Item Name",
                                                     AttributeValue = "N/A"
                                                 });
@@ -169,7 +167,7 @@ namespace eMSResourceImporter
                                                 Logger.Log(Logger.LogType.Warning, "Wrong attribute value.", new MessageDetails()
                                                 {
                                                     SourceFilePath = currentItem.SourceFile,
-                                                    LineNumbe = lineCounter,
+                                                    LineNumber = lineCounter,
                                                     AttributeName = "Item Object Type",
                                                     AttributeValue = "N/A"
                                                 });
@@ -184,7 +182,7 @@ namespace eMSResourceImporter
                                                 AttributeName = "Item Object Type",
                                                 AttributeValue = value,
                                                 SourceFilePath = currentItem.SourceFile,
-                                                LineNumbe = lineCounter,
+                                                LineNumber = lineCounter,
                                                 ItemNumber = currentItem.Number
                                             });
 
@@ -218,13 +216,15 @@ namespace eMSResourceImporter
                                         items.TryRemove(currentItem, out byte _);
                                     }
 
+                                    var lineNumber = lineCounter;
+
                                     tasks.Add(Task.Run(() =>
                                     {
                                         var pathToChildAJTFile = Path.ChangeExtension(fullFilePath, "ajt");
 
                                         if(!File.Exists(pathToChildAJTFile))
                                         {
-                                            Logger.Log(Logger.LogType.Warning, "File does not exist.", new MessageDetails() { FilePath = pathToChildAJTFile, SourceFilePath = pathToAJT, LineNumbe = lineCounter });
+                                            Logger.Log(Logger.LogType.Warning, "File does not exist.", new MessageDetails() { FilePath = pathToChildAJTFile, SourceFilePath = pathToAJT, LineNumber = lineNumber });
                                             return;
                                         }
 

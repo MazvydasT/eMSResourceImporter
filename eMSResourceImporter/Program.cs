@@ -33,18 +33,15 @@ namespace eMSResourceImporter
                 @"-s=P:\sys_root",
                 @"-c=P:\sys_root\LIBRARIES\MFG-LIB",
 
-                //@"-s=C:\Users\mtadara1\Desktop\sysroot",
-                //@"-c=C:\Users\mtadara1\Desktop\sysroot",
-
                 @"-a=C:\Program Files\Siemens\JtUtilities\12_4\bin64\asciitojt.exe",
 
                 "-p",
 
-                "-v",
+                //"-v",
 
                 @"-l=C:\Users\mtadara1\Desktop\log.csv",
 
-                //"--skipJTCreation",
+                "--skipJTCreation",
                 //"--forceJTCreation",
 
                 //"-?",
@@ -210,7 +207,7 @@ namespace eMSResourceImporter
             var itemsWithInvalidNumber = items.Keys.Where(item => string.IsNullOrWhiteSpace(item.Number));
             foreach (var itemWithInvalidNumber in itemsWithInvalidNumber)
             {
-                Logger.Log(Logger.LogType.Warning, "Excluding this branch. Not possible to extract valid part/assembly number.", new MessageDetails() { SourceFilePath = itemWithInvalidNumber.SourceFile, LineNumbe = itemWithInvalidNumber.LineInSource });
+                Logger.Log(Logger.LogType.Warning, "Excluding this branch. Not possible to extract valid part/assembly number.", new MessageDetails() { SourceFilePath = itemWithInvalidNumber.SourceFile, LineNumber = itemWithInvalidNumber.LineInSource });
                 
                 ItemsManager.RemoveItemAndDescendents(itemWithInvalidNumber, items);
             }
@@ -250,16 +247,6 @@ namespace eMSResourceImporter
                     fileName += $"{-resourceItem.Revision}";
 
                 resourceItem.FilePath = Path.Combine($"#{sysRootRelativeCADFolder}", $"{fileName}.cojt");
-
-#if DEBUG
-                /*if (resourceItem.Number == "RES0540155")
-                {
-                    var test = resourceItem;
-                }
-
-                else
-                    return;*/
-#endif
 
                 if (!skipJTCreation)
                 {
@@ -403,7 +390,7 @@ namespace eMSResourceImporter
                         {
                             ItemNumber = item.Number,
                             SourceFilePath = item.SourceFile,
-                            LineNumbe = item.LineInSource
+                            LineNumber = item.LineInSource
                         });
 
                     if (item.Revision == 0)
@@ -411,7 +398,7 @@ namespace eMSResourceImporter
                         {
                             ItemNumber = item.Number,
                             SourceFilePath = item.SourceFile,
-                            LineNumbe = item.LineInSource
+                            LineNumber = item.LineInSource
                         });
 
                     var title = item.Number;

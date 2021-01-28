@@ -12,7 +12,7 @@ namespace eMSResourceImporter
     {
         public string FilePath { get; set; } = null;
         public string SourceFilePath { get; set; } = null;
-        public int? LineNumbe { get; set; } = null;
+        public int? LineNumber { get; set; } = null;
         public int? Count { get; set; } = null;
         public string ItemNumber { get; set; } = null;
         public string ItemId { get; set; } = null;
@@ -44,7 +44,7 @@ namespace eMSResourceImporter
 
             var md = messageDetails;
 
-            var writeTask = Console.Error.WriteLineAsync($"{DateTime.Now},{type},{Utils.ToCSV(message)},{md?.Count},{Utils.ToCSV(md?.ItemNumber)},{Utils.ToCSV(md?.ItemId)},{Utils.ToCSV(md?.AttributeName)},{Utils.ToCSV(md?.AttributeValue)},{Utils.ToCSV(md?.FilePath)},{Utils.ToCSV(md?.SourceFilePath)},{md?.LineNumbe}");
+            var writeTask = Console.Error.WriteLineAsync($"{DateTime.Now},{type},{Utils.ToCSV(message)},{md?.Count},{Utils.ToCSV(md?.ItemNumber)},{Utils.ToCSV(md?.ItemId)},{Utils.ToCSV(md?.AttributeName)},{Utils.ToCSV(md?.AttributeValue)},{Utils.ToCSV(md?.FilePath)},{Utils.ToCSV(md?.SourceFilePath)},{md?.LineNumber}");
 
             WriteTasks.TryAdd(writeTask, 0);
 
