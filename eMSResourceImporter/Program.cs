@@ -33,7 +33,11 @@ namespace eMSResourceImporter
                 @"-s=P:\sys_root",
                 @"-c=P:\sys_root\LIBRARIES\MFG-LIB",
 
-                @"-a=C:\Program Files\Siemens\JtUtilities\12_4\bin64\asciitojt.exe",
+                //@"-s=C:\Users\mtadara1\Desktop\sys_root",
+                //@"-c=C:\Users\mtadara1\Desktop\sys_root\lib",
+
+                //@"-a=C:\Program Files\Siemens\JtUtilities\12_4\bin64\asciitojt.exe",
+                @"-a=P:\sys_root\Methods\Scripts\CodeLibraries\JtUtilities\7_1\bin\asciitojt.exe",
 
                 "-p",
 
@@ -41,7 +45,7 @@ namespace eMSResourceImporter
 
                 @"-l=C:\Users\mtadara1\Desktop\log.csv",
 
-                "--skipJTCreation",
+                //"--skipJTCreation",
                 //"--forceJTCreation",
 
                 //"-?",
@@ -426,9 +430,11 @@ namespace eMSResourceImporter
 
                             continue;
                         }
+                        
+                        externalIdTracker.Add(partExternalId);
 
-                        var threeDRepId = $"{partIdPrefix}3DRep_{item.Number}";
-                        var fileId = $"{partIdPrefix}ReferenceFile_{item.Number}";
+                        var threeDRepId = $"{partIdPrefix}3DRep_{item.Number}_{item.Revision}";
+                        var fileId = $"{partIdPrefix}ReferenceFile_{item.Number}_{item.Revision}";
 
                         xmlWriter.WriteStartElement("PmReferenceFile");
                         xmlWriter.WriteAttributeString("ExternalId", fileId);
